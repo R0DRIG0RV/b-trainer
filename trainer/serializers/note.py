@@ -26,3 +26,7 @@ class NoteSerializer(ModelSerializer):
         })
 
         return data
+    
+    def create(self, validated_data: dict) -> dict:
+        validated_data['user'] = self.context['request'].user
+        return super(NoteSerializer, self).create(validated_data)

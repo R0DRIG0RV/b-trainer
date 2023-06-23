@@ -29,3 +29,7 @@ class ClientSerializer(ModelSerializer):
         })
 
         return data
+    
+    def create(self, validated_data: dict) -> dict:
+        validated_data['user'] = self.context['request'].user
+        return super(ClientSerializer, self).create(validated_data)

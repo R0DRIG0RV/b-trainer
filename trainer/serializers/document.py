@@ -27,3 +27,7 @@ class DocumentSerializer(ModelSerializer):
         })
 
         return data
+    
+    def create(self, validated_data: dict) -> dict:
+        validated_data['user'] = self.context['request'].user
+        return super(DocumentSerializer, self).create(validated_data)
